@@ -1,4 +1,4 @@
-package com.example.final_server;
+package com.takanashi.final_server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
