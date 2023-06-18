@@ -7,6 +7,7 @@ import com.takanashi.final_server.entity.UserDTO;
 import com.takanashi.final_server.exception.BaseException;
 import com.takanashi.final_server.mapper.UserMapper;
 import com.takanashi.final_server.service.UserService;
+import com.takanashi.final_server.util.Transform;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,12 @@ import java.util.ListIterator;
 @Service
 public class UserServiceImpl implements UserService {
 
+    Transform transform;
      UserMapper userMapper ;
      @Autowired
-    public UserServiceImpl(UserMapper userMapper){
-        this.userMapper=userMapper;
+    public UserServiceImpl(UserMapper userMapper,Transform transform){
+         this.transform=transform;
+         this.userMapper=userMapper;
     }
     @Override
     public List<UserDTO> getUserMsg() throws BaseException {
@@ -29,14 +32,7 @@ public class UserServiceImpl implements UserService {
          if (users==null) throw new BaseException(ResponseCode.SERVER_ERROR);
          List<UserDTO> userDTOList = new ArrayList<>();
         for (User user: users) {
-            UserDTO dto = UserDTO.
-                    builder().
-                    id(user.getId()).
-                    HomeID(user.getHomeID()).
-                    Name(user.getName()).
-                    UserID(user.getUserID()).
-                    build();
-            userDTOList.add(dto);
+            userDTOList.add(transform.transform(user));
         }
 
         return userDTOList;
@@ -44,8 +40,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean saveUser(UserDTO userDTO) {
-         User user= new User(userDTO.getHomeID(),userDTO.getName(),userDTO.getUserID());
-         return userMapper.insert(user)==1;
+         return userMapper.insert(transform.transform(userDTO))==1;
     }
 
- }
+    @Override
+    public boolean deleteUser(UserDTO userDTO) {
+        return true;
+    }
+
+}
