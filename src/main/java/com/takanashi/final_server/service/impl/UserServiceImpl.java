@@ -1,5 +1,6 @@
 package com.takanashi.final_server.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.databind.util.ArrayIterator;
 import com.takanashi.final_server.constants.ResponseCode;
 import com.takanashi.final_server.entity.User;
@@ -45,7 +46,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUser(UserDTO userDTO) {
-        return true;
+         User user = transform.transform(userDTO);
+        QueryWrapper<User> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("user_id",user.getUserID());
+        return userMapper.delete(queryWrapper)==1;
     }
 
 }

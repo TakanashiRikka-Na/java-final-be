@@ -10,4 +10,6 @@ public interface UserService {
     List<UserDTO> getUserMsg() throws BaseException;
 
     boolean saveUser(UserDTO userDTO);
+    boolean deleteUser(UserDTO userDTO);
+
 }

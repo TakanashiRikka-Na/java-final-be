@@ -1,17 +1,14 @@
 package com.takanashi.final_server.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Setter
 public class UserDTO  {
-    private long id;
     private String Name;
     private String UserID;
     private   String HomeID;
@@ -24,9 +21,6 @@ public class UserDTO  {
           return HomeID;
      }
 
-     public long getId() {
-          return id;
-     }
 
      public String getName() {
           return Name;

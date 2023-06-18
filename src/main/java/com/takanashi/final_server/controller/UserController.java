@@ -7,6 +7,7 @@ import com.takanashi.final_server.entity.UserDTO;
 import com.takanashi.final_server.exception.BaseException;
 import com.takanashi.final_server.handler.Response;
 import com.takanashi.final_server.service.UserService;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,4 +48,15 @@ public class UserController {
        }
        return Response.SuccessResponse(null);
     }
+
+    @DeleteMapping("/user/{user_id}")
+    public Response DeleteUser(@PathVariable("user_id") String userID ){
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserID(userID);
+        if(!userService.deleteUser(userDTO)){
+            throw new BaseException(ResponseCode.USER_DATA_ERROR);
+        };
+        return Response.SuccessResponse(null);
+    }
+
 }
