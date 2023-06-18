@@ -1,18 +1,13 @@
 package com.takanashi.final_server.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.takanashi.final_server.constants.ResponseCode;
-import com.takanashi.final_server.entity.User;
 import com.takanashi.final_server.entity.UserDTO;
 import com.takanashi.final_server.exception.BaseException;
 import com.takanashi.final_server.handler.Response;
 import com.takanashi.final_server.service.UserService;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,13 +45,22 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{user_id}")
-    public Response DeleteUser(@PathVariable("user_id") String userID ){
+    public Response deleteUser(@PathVariable("user_id") String userID ){
         UserDTO userDTO = new UserDTO();
         userDTO.setUserID(userID);
         if(!userService.deleteUser(userDTO)){
             throw new BaseException(ResponseCode.USER_DATA_ERROR);
         };
         return Response.SuccessResponse(null);
+    }
+
+    @GetMapping("/user/{user_id}")
+    public Response getUserByUserID(@PathVariable("user_id")String userID){
+        UserDTO userByUserID = userService.getUserByUserID(userID);
+        if (userByUserID==null) {
+            throw new BaseException(ResponseCode.USER_DATA_ERROR);
+        }
+        return Response.SuccessResponse(userByUserID);
     }
 
 }

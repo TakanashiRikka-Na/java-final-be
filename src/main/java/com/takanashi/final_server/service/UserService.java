@@ -12,4 +12,5 @@ public interface UserService {
     boolean saveUser(UserDTO userDTO);
     boolean deleteUser(UserDTO userDTO);
 
+    UserDTO getUserByUserID(String userID);
 }

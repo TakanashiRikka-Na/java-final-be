@@ -1,7 +1,6 @@
 package com.takanashi.final_server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.fasterxml.jackson.databind.util.ArrayIterator;
 import com.takanashi.final_server.constants.ResponseCode;
 import com.takanashi.final_server.entity.User;
 import com.takanashi.final_server.entity.UserDTO;
@@ -9,13 +8,11 @@ import com.takanashi.final_server.exception.BaseException;
 import com.takanashi.final_server.mapper.UserMapper;
 import com.takanashi.final_server.service.UserService;
 import com.takanashi.final_server.util.Transform;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -50,6 +47,14 @@ public class UserServiceImpl implements UserService {
         QueryWrapper<User> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("user_id",user.getUserID());
         return userMapper.delete(queryWrapper)==1;
+    }
+
+    @Override
+    public UserDTO getUserByUserID(String userID) {
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.eq("user_id",userID);
+        User user = userMapper.selectOne(userQueryWrapper);
+        return  transform.transform(user);
     }
 
 }
