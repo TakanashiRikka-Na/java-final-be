@@ -1,5 +1,6 @@
 package com.takanashi.final_server.handler;
 
+import com.takanashi.final_server.constants.ResponseCode;
 import lombok.Getter;
 
 @Getter
@@ -17,6 +18,10 @@ public class Response<T> {
         return new Response<>(code, message, data);
     }
     public static <T>Response<T> SuccessResponse(T data){
-        return  Response.of(200,"success",data);
+        return  Response.of(ResponseCode.OK.getCode(),ResponseCode.OK.getMessage(), data);
+    }
+
+    public static <T>Response<T> ErrorResponse(ResponseCode responseCode){
+        return Response.of(responseCode.getCode(),responseCode.getMessage(),null);
     }
 }
