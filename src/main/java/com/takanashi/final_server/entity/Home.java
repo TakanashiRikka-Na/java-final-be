@@ -18,11 +18,14 @@ public class Home {
     @TableId(type = IdType.AUTO)
     private long id;
 
-    @TableField("home_id")
+    @TableField("room_id")
     private String HomeID;
     @TableField("leader")
     private String leader;
-
+    public Home(String leader,String HomeID){
+        this.HomeID=HomeID;
+        this.leader=leader;
+    }
     public String getHomeIDField() {
         return "home_id";
     }

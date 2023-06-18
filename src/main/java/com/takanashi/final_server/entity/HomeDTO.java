@@ -1,7 +1,11 @@
 package com.takanashi.final_server.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class HomeDTO {
-    private long id;
     private String HomeID;
     private String leader;
 
@@ -9,9 +13,6 @@ public class HomeDTO {
         return HomeID;
     }
 
-    public long getId() {
-        return id;
-    }
 
     public String getLeader() {
         return leader;
