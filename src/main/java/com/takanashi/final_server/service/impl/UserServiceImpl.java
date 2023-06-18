@@ -1,8 +1,10 @@
 package com.takanashi.final_server.service.impl;
 
 import com.fasterxml.jackson.databind.util.ArrayIterator;
+import com.takanashi.final_server.constants.ResponseCode;
 import com.takanashi.final_server.entity.User;
 import com.takanashi.final_server.entity.UserDTO;
+import com.takanashi.final_server.exception.BaseException;
 import com.takanashi.final_server.mapper.UserMapper;
 import com.takanashi.final_server.service.UserService;
 import org.springframework.beans.BeanUtils;
@@ -22,8 +24,9 @@ public class UserServiceImpl implements UserService {
         this.userMapper=userMapper;
     }
     @Override
-    public List<UserDTO> getUserMsg() {
+    public List<UserDTO> getUserMsg() throws BaseException {
          List<User> users = userMapper.searchAll();
+         if (users==null) throw new BaseException(ResponseCode.SERVER_ERROR);
          List<UserDTO> userDTOList = new ArrayList<>();
         for (User user: users) {
             UserDTO dto = UserDTO.
@@ -35,10 +38,14 @@ public class UserServiceImpl implements UserService {
                     build();
             userDTOList.add(dto);
         }
+
         return userDTOList;
     }
 
-    public  void CreateUser(User user){
-        userMapper.insert(user);
+    @Override
+    public boolean saveUser(UserDTO userDTO) {
+         User user= new User(userDTO.getHomeID(),userDTO.getName(),userDTO.getUserID());
+         return userMapper.insert(user)==1;
     }
+
  }
