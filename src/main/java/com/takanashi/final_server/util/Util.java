@@ -20,11 +20,11 @@ public class Util implements Transform{
 
     @Override
     public Home transform(HomeDTO homeDTO) {
-        return null;
+        return new Home(homeDTO.getHomeID(),homeDTO.getLeader());
     }
 
     @Override
     public HomeDTO transform(Home home) {
-        return null;
+        return new HomeDTO(home.getHomeID(),home.getLeader());
     }
 }
