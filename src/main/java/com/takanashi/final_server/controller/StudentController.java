@@ -23,29 +23,24 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/student")
     public Response<Map<String, List<StudentDTO>>> getUser() {
         Map<String, List<StudentDTO>> responseData = new HashMap<>();
-        try {
-            List<StudentDTO> studentDTOS = studentService.getStudentMsg();
-        } catch (BaseException exception) {
-
-        }
         List<StudentDTO> studentDTOS = studentService.getStudentMsg();
         responseData.put("user", studentDTOS);
         return Response.SuccessResponse(responseData);
     }
 
-    @PostMapping("/user")
-    public Response SaveUser(@RequestBody StudentDTO studentDTO) throws BaseException {
+    @PostMapping("/student")
+    public Response SaveStudent(@RequestBody StudentDTO studentDTO) throws BaseException {
        if( !studentService.saveStudent(studentDTO)){
            throw new BaseException(ResponseCode.USER_DATA_ERROR);
        }
        return Response.SuccessResponse(null);
     }
 
-    @DeleteMapping("/user/{user_id}")
-    public Response deleteUser(@PathVariable("user_id") String userID ){
+    @DeleteMapping("/student/{user_id}")
+    public Response deleteStudent(@PathVariable("user_id") String userID ){
         StudentDTO studentDTO = new StudentDTO();
         studentDTO.setUserID(userID);
         if(!studentService.deleteStudent(studentDTO)){
@@ -55,7 +50,7 @@ public class StudentController {
     }
 
     @GetMapping("/user/{user_id}")
-    public Response getUserByUserID(@PathVariable("user_id")String userID){
+    public Response getStudentByUserID(@PathVariable("user_id")String userID){
         StudentDTO userByUserID = studentService.getStudentByStudentID(userID);
         if (userByUserID==null) {
             throw new BaseException(ResponseCode.USER_DATA_ERROR);

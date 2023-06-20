@@ -12,20 +12,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserDTO {
 
-    private long id;
+        private long id;
 
-    private String userID;
+        private String userID;
 
+        private String passwd;
+        private String name;
 
-    private String name;
-
-    private String passwd;
 
     private boolean isTeacher;
     public UserDTO(String passwd,String name, String UserID,boolean isTeacher){
         this.userID =UserID;
         this.name=name;
-        this.passwd=passwd;
         this.isTeacher=isTeacher;
+        this.passwd=passwd;
     }
 }

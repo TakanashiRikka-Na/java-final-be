@@ -32,6 +32,6 @@ public class TransformUtil implements Transform{
 
     @Override
     public User transform(UserDTO userDTO) {
-        return new User(userDTO.getUserID(), userDTO.getName(), userDTO.getPasswd(), userDTO.isTeacher());
+        return new User(userDTO.getPasswd(), userDTO.getName(), userDTO.getUserID(), userDTO.isTeacher());
     }
 }

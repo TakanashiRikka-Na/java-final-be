@@ -9,7 +9,12 @@ public enum ResponseCode {
 
     USER_DATA_ERROR(2,"user data error", 400),
     DATA_NULL(3,"data is null", 404),
-    DATA_EXIST(4,"data existed", 400);
+    DATA_EXIST(4,"data existed", 400),
+    USER_EXIST(5,"User existed", 400),
+    USER_NOT_EXIST(5,"User not existed", 400),
+    PASSWD_NOT_VALID(6,"passwd is not valid",400),
+    PASSWD_DENIED(7,"密码错误",401),
+    GEN_TOKEN_FAILED(8,"gen token failed",401);
     private final int code;
     private final String message;
 
