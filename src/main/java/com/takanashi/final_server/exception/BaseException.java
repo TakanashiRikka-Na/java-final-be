@@ -10,6 +10,11 @@ public class BaseException extends RuntimeException{
         super(code.getMessage());
         this.code = code;
     }
+
+    public ResponseCode getCode() {
+        return code;
+    }
+
     @Override
     public String toString() {
         return super.toString();
