@@ -1,13 +1,10 @@
 package com.takanashi.final_server.util;
 
-import com.takanashi.final_server.entity.Home;
-import com.takanashi.final_server.entity.HomeDTO;
-import com.takanashi.final_server.entity.Student;
-import com.takanashi.final_server.entity.StudentDTO;
+import com.takanashi.final_server.entity.*;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Util implements Transform{
+public class TransformUtil implements Transform{
     @Override
     public Student transform(StudentDTO studentDTO) {
         return new Student(studentDTO.getHomeID(), studentDTO.getName(), studentDTO.getUserID());
@@ -26,5 +23,15 @@ public class Util implements Transform{
     @Override
     public HomeDTO transform(Home home) {
         return new HomeDTO(home.getHomeID(),home.getLeader());
+    }
+
+    @Override
+    public UserDTO transform(User user) {
+        return new UserDTO(user.getPasswd(), user.getName(), user.getUserID(), user.isTeacher());
+    }
+
+    @Override
+    public User transform(UserDTO userDTO) {
+        return new User(userDTO.getUserID(), userDTO.getName(), userDTO.getPasswd(), userDTO.isTeacher());
     }
 }
