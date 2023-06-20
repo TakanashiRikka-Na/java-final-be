@@ -2,12 +2,12 @@ package com.takanashi.final_server.util;
 
 import com.takanashi.final_server.entity.Home;
 import com.takanashi.final_server.entity.HomeDTO;
-import com.takanashi.final_server.entity.User;
-import com.takanashi.final_server.entity.UserDTO;
+import com.takanashi.final_server.entity.Student;
+import com.takanashi.final_server.entity.StudentDTO;
 
 public interface Transform {
-     User transform(UserDTO userDTO);
-     UserDTO transform(User user);
+     Student transform(StudentDTO studentDTO);
+     StudentDTO transform(Student student);
 
      Home transform(HomeDTO homeDTO);
 

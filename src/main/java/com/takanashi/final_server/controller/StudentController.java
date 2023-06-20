@@ -1,10 +1,10 @@
 package com.takanashi.final_server.controller;
 
 import com.takanashi.final_server.constants.ResponseCode;
-import com.takanashi.final_server.entity.UserDTO;
+import com.takanashi.final_server.entity.StudentDTO;
 import com.takanashi.final_server.exception.BaseException;
 import com.takanashi.final_server.handler.Response;
-import com.takanashi.final_server.service.UserService;
+import com.takanashi.final_server.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,31 +14,31 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("")
-public class UserController {
+public class StudentController {
 
-    UserService userService;
+    StudentService studentService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @GetMapping("/user")
-    public Response<Map<String, List<UserDTO>>> getUser() {
-        Map<String, List<UserDTO>> responseData = new HashMap<>();
+    public Response<Map<String, List<StudentDTO>>> getUser() {
+        Map<String, List<StudentDTO>> responseData = new HashMap<>();
         try {
-            List<UserDTO> userDTOs = userService.getUserMsg();
+            List<StudentDTO> studentDTOS = studentService.getStudentMsg();
         } catch (BaseException exception) {
 
         }
-        List<UserDTO> userDTOs = userService.getUserMsg();
-        responseData.put("user", userDTOs);
+        List<StudentDTO> studentDTOS = studentService.getStudentMsg();
+        responseData.put("user", studentDTOS);
         return Response.SuccessResponse(responseData);
     }
 
     @PostMapping("/user")
-    public Response SaveUser(@RequestBody UserDTO userDTO) throws BaseException {
-       if( !userService.saveUser(userDTO)){
+    public Response SaveUser(@RequestBody StudentDTO studentDTO) throws BaseException {
+       if( !studentService.saveStudent(studentDTO)){
            throw new BaseException(ResponseCode.USER_DATA_ERROR);
        }
        return Response.SuccessResponse(null);
@@ -46,9 +46,9 @@ public class UserController {
 
     @DeleteMapping("/user/{user_id}")
     public Response deleteUser(@PathVariable("user_id") String userID ){
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUserID(userID);
-        if(!userService.deleteUser(userDTO)){
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setUserID(userID);
+        if(!studentService.deleteStudent(studentDTO)){
             throw new BaseException(ResponseCode.USER_DATA_ERROR);
         };
         return Response.SuccessResponse(null);
@@ -56,7 +56,7 @@ public class UserController {
 
     @GetMapping("/user/{user_id}")
     public Response getUserByUserID(@PathVariable("user_id")String userID){
-        UserDTO userByUserID = userService.getUserByUserID(userID);
+        StudentDTO userByUserID = studentService.getStudentByStudentID(userID);
         if (userByUserID==null) {
             throw new BaseException(ResponseCode.USER_DATA_ERROR);
         }

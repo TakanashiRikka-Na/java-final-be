@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+public class Student {
     @TableId(type = IdType.AUTO)
    private    long id;
     @TableField("name")
@@ -38,7 +38,7 @@ public class User {
         return Name;
     }
 
-    public User(String HomeID,String Name,String UserID){
+    public Student(String HomeID, String Name, String UserID){
         this.HomeID=HomeID;
         this.UserID=UserID;
         this.Name=Name;

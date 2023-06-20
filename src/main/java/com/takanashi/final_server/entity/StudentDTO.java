@@ -1,6 +1,5 @@
 package com.takanashi.final_server.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
 @Data
@@ -8,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Setter
-public class UserDTO  {
+public class StudentDTO {
     private String Name;
     private String UserID;
     private   String HomeID;
