@@ -19,11 +19,12 @@ public class HomeController {
     public HomeController(HomeService homeService){
         this.homeService=homeService;
     }
-    @GetMapping("/home/{leader_id}")
+    @GetMapping("/home/leader/{leader_id}")
     public Response<HomeDTO> getHomeByLeaderID(@PathVariable("leader_id") String leaderID){
-        HomeDTO homeByLeader = homeService.getHomeByLeader(leaderID);
-        if (homeByLeader==null) throw new BaseException(ResponseCode.SERVER_ERROR);
-        return Response.SuccessResponse(homeByLeader);
+        return Response.SuccessResponse( homeService.getHomeByLeader(leaderID));
     }
-
+    @GetMapping("/home/room/{room_id}")
+    public Response<HomeDTO> getHomeByRoomID(@PathVariable("room_id") String roomID){
+        return Response.SuccessResponse(homeService.getHomeByRoomID(roomID));
+    }
 }
