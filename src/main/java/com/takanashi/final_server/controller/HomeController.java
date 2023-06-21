@@ -1,8 +1,6 @@
 package com.takanashi.final_server.controller;
 
-import com.takanashi.final_server.constants.ResponseCode;
 import com.takanashi.final_server.entity.HomeDTO;
-import com.takanashi.final_server.exception.BaseException;
 import com.takanashi.final_server.handler.Response;
 import com.takanashi.final_server.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/teacher")
 public class HomeController {
     HomeService homeService;
     @Autowired
