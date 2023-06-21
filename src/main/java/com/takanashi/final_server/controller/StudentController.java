@@ -31,7 +31,7 @@ public class StudentController {
         return Response.SuccessResponse(responseData);
     }
 
-    @PostMapping("/student")
+    @PostMapping("/teacher/student")
     public Response SaveStudent(@RequestBody StudentDTO studentDTO) throws BaseException {
        if( !studentService.saveStudent(studentDTO)){
            throw new BaseException(ResponseCode.USER_DATA_ERROR);
@@ -39,17 +39,17 @@ public class StudentController {
        return Response.SuccessResponse(null);
     }
 
-    @DeleteMapping("/student/{user_id}")
+    @DeleteMapping("/teacher/student/{user_id}")
     public Response deleteStudent(@PathVariable("user_id") String userID ){
         StudentDTO studentDTO = new StudentDTO();
         studentDTO.setUserID(userID);
         if(!studentService.deleteStudent(studentDTO)){
             throw new BaseException(ResponseCode.USER_DATA_ERROR);
-        };
+        }
         return Response.SuccessResponse(null);
     }
 
-    @GetMapping("/user/{user_id}")
+    @GetMapping("/student/{user_id}")
     public Response getStudentByUserID(@PathVariable("user_id")String userID){
         StudentDTO userByUserID = studentService.getStudentByStudentID(userID);
         if (userByUserID==null) {

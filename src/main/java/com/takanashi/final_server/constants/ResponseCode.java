@@ -14,7 +14,9 @@ public enum ResponseCode {
     USER_NOT_EXIST(5,"User not existed", 400),
     PASSWD_NOT_VALID(6,"passwd is not valid",400),
     PASSWD_DENIED(7,"密码错误",401),
-    GEN_TOKEN_FAILED(8,"gen token failed",401);
+    GEN_TOKEN_FAILED(8,"gen token failed",401),
+
+    AUTH_ERROR(9,"Permisson Denied",401);
     private final int code;
     private final String message;
 

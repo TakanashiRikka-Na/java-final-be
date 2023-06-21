@@ -9,6 +9,6 @@ import java.util.List;
 
 @Component
 public interface StudentMapper extends BaseMapper<Student> {
-    @Select("select id,home_id as HomeID,user_id as UserID ,name as Name from user")
+    @Select("select id,home_id as HomeID,user_id as UserID ,name as Name from students")
     List<Student> searchAll();
 }

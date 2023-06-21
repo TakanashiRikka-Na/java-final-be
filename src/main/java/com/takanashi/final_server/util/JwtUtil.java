@@ -3,11 +3,14 @@ package com.takanashi.final_server.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.takanashi.final_server.config.JwtConfig;
+import com.takanashi.final_server.constants.ResponseCode;
 import com.takanashi.final_server.entity.User;
+import com.takanashi.final_server.exception.AuthException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,15 +48,21 @@ public class JwtUtil {
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(jwtConfig.getSecret()).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
         String userStr = claims.get("UserInfo").toString();
-        byte[] bytes = userStr.getBytes();
         ObjectMapper objectMapper = new ObjectMapper();
-        User myObject = objectMapper.readValue(userStr,User.class);
 
-        return  myObject;
+        return objectMapper.readValue(userStr,User.class);
     }
 
     public String  addHeader(String originToken){
         return jwtConfig.getHeader() + " " + originToken;
+    }
+
+
+    public String getTokenFromHeader(HttpServletRequest request) throws AuthException{
+        String authorization = request.getHeader("Authorization");
+        if (authorization==null||authorization.isBlank()||!authorization.startsWith("rikka")) throw new AuthException(ResponseCode.AUTH_ERROR);
+        String[] split = authorization.split(" ");
+        return split[1];
     }
 }
 
