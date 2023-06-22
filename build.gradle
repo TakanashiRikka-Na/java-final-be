@@ -4,8 +4,8 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+group = 'com.takanshi'
+version = '0.0.2-fix'
 
 java {
     sourceCompatibility = '17'
@@ -14,8 +14,18 @@ java {
 repositories {
     mavenCentral()
 }
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.takanashi.final_server.FinalServerApplication'
+        )
+    }
+}
+
 
 dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation  'com.github.yulichang:mybatis-plus-join:1.4.5'
     implementation 'com.baomidou:mybatis-plus-boot-starter:3.5.3.1'
@@ -25,9 +35,8 @@ dependencies {
     implementation 'com.auth0:java-jwt:4.3.0'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation "javax.xml.bind:jaxb-api:2.3.1"
-    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.2'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
     implementation 'com.sun.xml.bind:jaxb-core:3.0.2'
-    implementation 'com.sun.xml.bind:jaxb-runtime:3.0.2'
     implementation 'org.mindrot:jbcrypt:0.4'
     implementation 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
